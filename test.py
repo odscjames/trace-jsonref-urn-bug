@@ -1,7 +1,6 @@
 import os
 import jsonref
 import pathlib
-import referencing
 import json
 
 base_uri = pathlib.Path(
@@ -9,19 +8,13 @@ base_uri = pathlib.Path(
 ).as_uri() + "/"
 
 with open("libs.json") as fp:
-    resource = referencing.Resource.from_contents(json.load(fp))
-
-registry = resource @ referencing.Registry()
-
+    lib = json.load(fp)
 
 def _jsonref_loader(uri):
-    global registry
+    global lib
     print("LOADING {}".format(uri))
-    if uri.startswith("urn:"):
-        if uri in registry:
-            return registry.contents(uri)
-        else:
-            raise Exception("URN {} not found".format(uri))
+    if uri == "urn:library":
+        return lib
     return jsonref.jsonloader(uri)
 
 
