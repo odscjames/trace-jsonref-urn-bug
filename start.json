@@ -1,0 +1,11 @@
+{
+  "$id": "urn:start",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "home_address": {
+        "title": "Home Address",
+        "description": "Where the person lives",
+        "$ref": "libs.json#/$defs/address"
+      }
+    }
+}
